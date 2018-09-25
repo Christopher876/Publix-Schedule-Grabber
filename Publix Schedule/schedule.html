@@ -1,0 +1,687 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="ui-mobile"><head><base href="https://passport-sso.publix.org/PASSPortMobile/Schedule/Schedule" />
+    <meta charset="utf-8" />
+    <title>Schedule</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, user-scalable=no" />
+    <link href="/PASSPortMobile/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/PASSPortMobile/Content/mobileCss?v=Rsri0WiJ-CkmqBgXBivpuOtq3-XD9FfvgmN6V3tVeZI1" rel="stylesheet" />
+<link href="/PASSPortMobile/Content/css?v=F3Fi4VklDPODwy9XBcPuejmoYLe6JqHtVDiijxnpmjA1" rel="stylesheet" />
+
+    <script src="/PASSPortMobile/bundles/modernizr?v="></script>
+
+    <script src="/PASSPortMobile/bundles/jquery?v=oilVNabieQtjGvt7yb-WjutlCh9NXACziLXzWqCugTc1"></script>
+<script src="/PASSPortMobile/bundles/jquerymobile?v=10Hai2wGimpOWsLI_2CwXsi6AYO3g_SijFzi5siecqc1"></script>
+<script src="/PASSPortMobile/bundles/jqueryval?v=_ZQnlztGa-CziuHpiltfPHujT9yB4xOKSGPcem5la8k1"></script>
+
+    <script src="/PASSPortMobile/bundles/genericscripts?v=ZqHMbQrU6piSPh7p_yKH5ixzb5KCdSwQS92eYHfVI4o1"></script>
+
+    <link href="/PASSPortMobile/Content/Site.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .menu span
+        {
+            background: url(/PASSPortMobile/Content/images/mobilesprite.png);
+            background-color: Transparent;
+            text-indent: -9999px !important;
+            width: 25px !important;
+            height: 25px !important;
+            display: block;
+            background-position: -632px -288px;
+        }
+        .menu-clicked span
+        {
+            background: url(/PASSPortMobile/Content/images/mobilesprite.png);
+            background-color: Transparent;
+            text-indent: -9999px !important;
+            width: 50px !important;
+            height: 40px !important;
+            display: block;
+            background-position: -510px -260px;
+        }
+    </style>
+    <script>
+        function ssoLogout() {
+            window.location.replace('https://passport-sso.publix.org/' + "siteminderagent/forms/logout.jsp?filename=logoutPass.html");
+        }
+        function RedirectToView(view) {
+            window.location.href = view;
+        }
+        $(function () {
+            if ($.mobile != undefined) $.mobile.ajaxEnabled = false;
+            jQuery.ajaxSetup({
+                beforeSend: function () {
+                    $('.ui-loader').show();
+                },
+                complete: function () {
+                    $('.ui-loader').hide();
+                },
+                success: function () { }
+            });
+        });
+        $(document).on("pageinit", "#page1", function (e) {
+            if ($.mobile != undefined) $.mobile.ajaxEnabled = false;
+            var menuStatus = false;
+            function sendForeground() {
+                $(".menu").addClass('menu-clicked'); //change the icon if menu is unclicked
+                $(".ui-bar").addClass("activeMenuHeader"); //add the green bottom line if menu is clicked
+                $("#menu").slideToggle(100);
+            };
+
+            function sendBackground() {
+                $(".menu").removeClass('menu-clicked'); //change the icon if menu is unclicked
+                $(".ui-bar").removeClass("activeMenuHeader"); //remove the green bottom line if menu is unclicked
+                $("#menu").slideToggle(100);
+            };
+
+            function showMenu() {
+                if (menuStatus == false) {
+                    sendForeground(); //called when menu needs to displayed
+                    menuStatus = true;
+                } else {
+                    sendBackground(); //called when menu needs to hide
+                    menuStatus = false;
+                }
+            };
+
+            $(document).on("click", ".menu", function () {
+                showMenu();
+            });
+
+            $(document).bind("pagechange", function (event, data) {
+                $('section[data-url="' + data.toPage.attr('data-url') + '"]:not(:last)').remove();
+            });
+
+            $(document).on("click", "#menu ul li a", function () {
+                sendBackground();
+                $("#menu").animate({
+                    display: "none"
+                }, 0);
+                menuStatus = false;
+            });
+        });
+    </script>
+     <!-- For third-generation iPad with high-resolution Retina display: --> 
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../apple-touch-icon-144x144-precomposed.png" />
+	 <!-- For iPhone with high-resolution Retina display running iOS ≥ 7: --> 
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../apple-touch-icon-120x120-precomposed.png" /> 
+	<!-- For iPhone with high-resolution Retina display running iOS ≤ 6: --> 
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../apple-touch-icon-114x114-precomposed.png" /> 
+	<!-- For first- and second-generation iPad: --> 
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../apple-touch-icon-72x72-precomposed.png" /> 
+	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: --> 
+	<link rel="apple-touch-icon-precomposed" href="../../apple-touch-icon-precomposed.png" />
+</head>
+<body data-theme="b" class="ui-mobile-viewport ui-overlay-c">
+    <div data-role="page" id="page1" data-url="page1" tabindex="0" class="ui-page ui-body-c ui-page-footer-fixed ui-page-active" style="padding-bottom: 15px; min-height: 868px;">
+<div class="ui-bar ui-bar-b header">
+    <div class="ui-grid-a">
+        <div class="ui-block-a" style="width: 90%;text-align: center;">
+            <h3 style="vertical-align: middle;">Schedule</h3>
+        </div>
+        <div class="ui-block-b" style="width: 10%">
+            <a href="#" class="menu ui-link"><span>Menu</span></a>
+        </div>
+    </div>
+</div>
+        <div data-role="content" class="ui-content" role="main">
+            <div id="menu" data-theme="c" style="display: none; position: relative; padding-bottom: 10px;">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a data-role="button" data-theme="b" href="#" onclick="RedirectToView('/PASSPortMobile/')" style="float:right;" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-b ui-shadow ui-btn-corner-all"><span class="ui-btn-inner"><span class="ui-btn-text">Home</span></span></a>
+                    </div>
+                    <div class="ui-block-b">
+                            <a href="javascript:ssoLogout();" data-role="button" data-theme="b" style="float: left;" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-b ui-shadow ui-btn-corner-all"><span class="ui-btn-inner"><span class="ui-btn-text">
+                                Log Out
+                            </span></span></a>
+                    </div>
+                </div>
+                
+<div data-theme="b">
+    <ul data-role="listview" data-inset="true" data-theme="a" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+        <li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="a" class="ui-btn ui-btn-up-a ui-btn-icon-right ui-li-has-arrow ui-li ui-first-child ui-last-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text">
+            <a href="#" onclick="RedirectToView('/PASSPortMobile/Preferences/GoPaperless')" class="ui-link-inherit">Go Paperless</a>
+        </div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></div></li>
+    </ul>
+                            <ul data-role="listview" data-inset="true" data-theme="a" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+
+
+            <li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="a" class="ui-btn ui-btn-up-a ui-btn-icon-right ui-li-has-arrow ui-li ui-first-child ui-last-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"> <a href="#" onclick="RedirectToView('/PASSPortMobile/Schedule/Schedule')" class="ui-link-inherit">Schedule</a> </div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></div></li>
+
+
+        </ul>
+            <ul data-role="listview" data-inset="true" data-theme="a" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+
+
+            <li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="a" class="ui-btn ui-btn-up-a ui-btn-icon-right ui-li-has-arrow ui-li ui-first-child ui-last-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"> <a href="#" onclick="RedirectToView('/PASSPortMobile/Timecard/Timecard')" class="ui-link-inherit">Timecard</a> </div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></div></li>
+
+
+        </ul>
+    <ul data-role="listview" data-inset="true" data-theme="a" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+
+
+        <li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="a" class="ui-btn ui-btn-up-a ui-btn-icon-right ui-li-has-arrow ui-li ui-first-child ui-last-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"> <a href="#" onclick="RedirectToView('/PASSPortMobile/TOR/Overview')" class="ui-link-inherit">Time Off Requests</a> </div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></div></li>
+
+
+    </ul>
+
+
+    <ul data-role="listview" data-inset="true" data-theme="a" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+
+
+        <li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="a" class="ui-btn ui-btn-up-a ui-btn-icon-right ui-li-has-arrow ui-li ui-first-child ui-last-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"> <a href="#" onclick="RedirectToView('/PASSPortMobile/Pay/Statements')" class="ui-link-inherit">Pay Statements</a> </div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></div></li>
+
+
+    </ul>
+    
+        <ul data-role="listview" data-inset="true" data-theme="a" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                <li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="a" class="ui-btn ui-btn-up-a ui-btn-icon-right ui-li-has-arrow ui-li ui-first-child ui-last-child"><div class="ui-btn-inner ui-li"><div class="ui-btn-text"><a href="#" onclick="RedirectToView('/PASSPortMobile/WCH/WorkCreditHours')" class="ui-link-inherit">Work Credit Hours</a></div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></div></li>
+        </ul>
+</div>
+
+            </div>
+            
+<style>
+    .ui-btn-inner
+    {
+        border-top-width: 0px !important;
+    }
+    .ui-btn-up-a
+    {
+        -moz-box-shadow: 0px 0px 0px /*{global-box-shadow-size}*/ rgba(0,0,0,.3) /*{global-box-shadow-color}*/ !important;
+        -webkit-box-shadow: 0px 0px 0px /*{global-box-shadow-size}*/ rgba(0,0,0,.3) /*{global-box-shadow-color}*/ !important;
+        box-shadow: 0px 0px 0px /*{global-box-shadow-size}*/ rgba(0,0,0,.4) /*{global-box-shadow-color}*/ !important;
+        background-image: none !important;
+        background-color: White;
+        border-bottom-width: 0px;
+    }
+    .ui-btn-hover-a
+    {
+        background-image: none !important;
+        background-color: White;
+        border-bottom-width: 0px;
+    }
+    .ui-collapsible-heading-collapsed
+    {
+        padding-bottom: 4px !important;
+    }
+    .ui-body-c, .ui-overlay-c
+    {
+        background-image: none !important;
+    }
+    #divSchedule  .ui-icon
+    {
+        /*background-image: url(../../Content/images/mobilesprite.png);*/
+        background-image: url(/PASSPortMobile/Content/images/mobilesprite.png);
+        -webkit-background-size: 432px 52px;
+        background-size: 432px 52px;
+    }
+    #divSchedule  .ui-icon-arrow-r
+    {
+        background-position: -268px -31px;
+        width: 21px;
+        height: 23px;
+    }
+    #divSchedule  .ui-icon-arrow-d
+    {
+        background-position: -269px -5px;
+        width: 21px;
+        height: 23px;
+    }
+    
+    .ui-collapsible-content
+    {
+        padding: 0px;
+        background-color: White;
+    }
+    .headerWidget
+    {
+        background: none;
+        border: 1px solid #aaaaaa /*{borderColorHeader}*/;
+        background-image: linear-gradient(to bottom, #FFFFFF 0%, #E9E9E9 40%) !important;
+        border-radius: 4px;
+        width: 94%;
+    }
+    .headerWidget div a, .headerWidget div a
+    {
+        padding: 6px 6px 6px 6px !important;
+    }
+    .previousButton
+    {
+        float: left;
+        font-weight: normal /*{fwDefault}*/;
+        color: #212121 /*{fcHover}*/;
+        display: block;
+        background: url(/PASSPortMobile/Content/images/mobilesprite.png);
+        text-indent: -9999px;
+        width: 17px;
+        height: 100%;
+        background-position: -16px -229px;
+        margin-left: -2px;
+    }
+    .nextButton
+    {
+        float: left;
+        font-weight: normal /*{fwDefault}*/;
+        color: #212121 /*{fcHover}*/;
+        display: block;
+        background: url(/PASSPortMobile/Content/images/mobilesprite.png);
+        text-indent: -9999px;
+        width: 17px;
+        height: 100%;
+        background-position: -47px -229px;
+        float: right;
+        margin-right: -4px;
+    }
+    
+    .NotScheduled  .ui-icon
+    {
+        /*background-image: url(../../Content/images/mobilesprite.png);*/
+        background-image: none !important;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        jQuery.ajaxSetup({
+            beforeSend: function () {
+                $('.ui-loader').show();
+            },
+            complete: function () {
+                $('.ui-loader').hide();
+            },
+            success: function () { }
+        });
+        var DetailTitles = $(".ScheduleDayDetailTitle");
+        DetailTitles.each(function (index, value) {
+            if (Trim($(value).html()) == "Meal" &amp;&amp;
+                   DetailTitles.eq(index + 1).html() != null &amp;&amp;
+                   Trim(DetailTitles.eq(index + 1).html()) == "Meal") {
+                $(value).parent().parent().addClass('ScheduleDayDetailNoBorder')
+            }
+        });
+
+        var StoreNumbers = $(".ScheduleDayDetailStoreNumber");
+        StoreNumbers.each(function (index, value) {
+            var temp = $(this).parent().parent().parent().prev().find(".ScheduleDayDetailTitle");
+            for (i = 0; i &lt; temp.length; i++) {
+                if (temp.html() == "Meal") {
+                    temp.parent().parent().addClass('ScheduleDayDetailNoBorder');
+                }
+            }
+        });
+
+        $(".ScheduleDayDetailStoreNumber").prev(".ScheduleDayDetailTitle").parent().addClass('ScheduleDayDetailNoBorder');
+
+        $(document).find(".NotScheduled").each(function () {
+            $(this).off("expand");
+        });
+
+        $(document).on("collapse", ".ui-collapsible", WireUpCollapseEvent);
+        $(document).on("expand", ".ui-collapsible", WireUpExpandEvent);
+
+        $(document).on("swiperight", '#page1', onSwipeRight);
+        $(document).on("swipeleft", '#page1', onSwipeLeft);
+
+        function onSwipeRight(event) {
+            RedirectToView('/PASSPortMobile/Schedule/Schedule/08-11-2018');
+        }
+        function onSwipeLeft(event) {
+            var fromDate = new Date("8/25/2018");
+            var nextSat = new Date("9/1/2018");
+            if (fromDate &lt; nextSat) {
+                RedirectToView('/PASSPortMobile/Schedule/Schedule/08-25-2018');
+            }
+
+        }
+
+    });
+</script>
+<form action="/PASSPortMobile/Schedule/Schedule" data-ajax="false" method="get" novalidate="novalidate">    <div id="content">
+        <div class="ui-grid-a">
+            <div class="ui-block-a" style="width: 85%">
+                <div class="ui-grid-b headerWidget" data-inset="true">
+                    <div class="ui-block-a" style="text-align: center; width: 10%">
+                        <a class="previousButton ui-link" href="/PASSPortMobile/Schedule/Schedule/08-11-2018">Previous</a>
+                    </div>
+                    <div class="ui-block-b WeekOfText" style="text-align: center; padding: 6px 6px 6px 6px !important;&#10;                        width: 80%;">
+                        Week of 08/18/2018
+                    </div>
+                    <div class="ui-block-c" style="text-align: center; width: 10%">
+<a class="nextButton ui-link" href="/PASSPortMobile/Schedule/Schedule/08-25-2018">Next</a>                    </div>
+                </div>
+            </div>
+                <div class="ui-block-b" style="width: 38px; height: 38px;">
+                    <a class="TimeCardIcon ui-link" href="/PASSPortMobile/Timecard/Timecard/08-18-2018">Timecard</a>
+                </div>
+        </div>
+        <div class="ui-grid-a" style="height:30px;">
+            <div class="ui-block-a">
+                <div class="WeeklyTotals">
+                    Total Scheduled: 34.5
+                </div>
+            </div>
+            <div class="ui-grid-b">
+                <div class="ui-block-a ui-icon-exclaimation" style="width: 23%">
+                                  
+                </div>
+                 <div class="ui-block-b WeeklyTotals" style="width: 77%;">
+                        Schedule Change
+                    </div>
+            </div>
+            <!-- <div class="WeeklyTotals"style="vertical-align:top;float:centre;"> 
+            
+        </div> -->
+        </div>
+        <div data-role="collapsible-set" data-iconpos="right" data-inset="false" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-theme="a" id="divSchedule" class="ui-collapsible-set">
+<div data-role="collapsible" style="background-color: White" class="SingleShift ui-collapsible ui-collapsible-collapsed ui-first-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-up-a ui-btn-icon-right" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-r" data-iconpos="right" data-theme="a"><span class="ui-btn-inner"><span class="ui-btn-text">
+        <div class="CollapsedScheduleDay">
+            <div class="ScheduleDayName">
+                Sat</div>
+            <div class="ScheduleDayDate">
+                08/18</div>
+                      
+        </div>
+       
+        <span class="ScheduleDayHeaderText" style="display:inline-block;">
+         
+                <span style="vertical-align: top;display:inline-block;">09:30 AM - 06:00 PM
+                                <div style="margin-left: 115px;"></div>
+               </span>
+          
+                             <span class="ui-icon-exclaimation" style="display: inline-block; "></span>
+        </span>
+ 
+    <span class="ui-collapsible-heading-status"> click to expand contents</span></span><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></span></a></h3><div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">
+    
+    <table cellpadding="0" cellspacing="0">
+    <tbody><tr>
+        <td class="ScheduleDayPadding">
+             
+        </td>
+        <td style="padding: 0px 10px 0px 10px !important; width: 100%">
+            <div class="ScheduleDayDetail">
+                    <div class="ScheduleDayDetailStoreNumber">
+                        Store #0371
+                    </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a ScheduleDayDetailTitle WordWrap">Grocery Clerk</div>
+                    <div class="ui-block-b ScheduleDayDetailTime">09:30 AM - 06:00 PM</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="ScheduleDayPadding">
+             
+        </td>
+        <td style="padding: 0px 10px 0px 10px !important; width: 100%">
+            <div class="ScheduleDayDetail">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a ScheduleDayDetailTitle WordWrap">Meal</div>
+                    <div class="ui-block-b ScheduleDayDetailTime">01:15 PM - 02:15 PM</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+            </tbody></table>
+</div></div>
+<div data-role="collapsible" style="background-color: White" class="SingleShift ui-collapsible ui-collapsible-collapsed"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-up-a ui-btn-icon-right" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-r" data-iconpos="right" data-theme="a"><span class="ui-btn-inner"><span class="ui-btn-text">
+        <div class="CollapsedScheduleDay">
+            <div class="ScheduleDayName">
+                Sun</div>
+            <div class="ScheduleDayDate">
+                08/19</div>
+                      
+        </div>
+       
+        <span class="ScheduleDayHeaderText" style="display:inline-block;">
+         
+                <span style="vertical-align: top;display:inline-block;">03:00 PM - 12:00 AM
+                                <div style="margin-left: 115px;"></div>
+               </span>
+          
+                    </span>
+ 
+    <span class="ui-collapsible-heading-status"> click to expand contents</span></span><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></span></a></h3><div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">
+    
+    <table cellpadding="0" cellspacing="0">
+    <tbody><tr>
+        <td class="ScheduleDayPadding">
+             
+        </td>
+        <td style="padding: 0px 10px 0px 10px !important; width: 100%">
+            <div class="ScheduleDayDetail">
+                    <div class="ScheduleDayDetailStoreNumber">
+                        Store #0371
+                    </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a ScheduleDayDetailTitle WordWrap">Grocery Clerk</div>
+                    <div class="ui-block-b ScheduleDayDetailTime">03:00 PM - 12:00 AM</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="ScheduleDayPadding">
+             
+        </td>
+        <td style="padding: 0px 10px 0px 10px !important; width: 100%">
+            <div class="ScheduleDayDetail">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a ScheduleDayDetailTitle WordWrap">Meal</div>
+                    <div class="ui-block-b ScheduleDayDetailTime">07:00 PM - 08:00 PM</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+            </tbody></table>
+</div></div>
+<div data-role="collapsible" style="background-color: White" class="SingleShift ui-collapsible ui-collapsible-collapsed"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-up-a ui-btn-icon-right" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-r" data-iconpos="right" data-theme="a"><span class="ui-btn-inner"><span class="ui-btn-text">
+        <div class="CollapsedScheduleDay">
+            <div class="ScheduleDayName">
+                Mon</div>
+            <div class="ScheduleDayDate">
+                08/20</div>
+                      
+        </div>
+       
+        <span class="ScheduleDayHeaderText" style="display:inline-block;">
+         
+                <span style="vertical-align: top;display:inline-block;">04:00 PM - 12:00 AM
+                                <div style="margin-left: 115px;"></div>
+               </span>
+          
+                    </span>
+ 
+    <span class="ui-collapsible-heading-status"> click to expand contents</span></span><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></span></a></h3><div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">
+    
+    <table cellpadding="0" cellspacing="0">
+    <tbody><tr>
+        <td class="ScheduleDayPadding">
+             
+        </td>
+        <td style="padding: 0px 10px 0px 10px !important; width: 100%">
+            <div class="ScheduleDayDetail">
+                    <div class="ScheduleDayDetailStoreNumber">
+                        Store #0371
+                    </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a ScheduleDayDetailTitle WordWrap">Grocery Clerk</div>
+                    <div class="ui-block-b ScheduleDayDetailTime">04:00 PM - 12:00 AM</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="ScheduleDayPadding">
+             
+        </td>
+        <td style="padding: 0px 10px 0px 10px !important; width: 100%">
+            <div class="ScheduleDayDetail">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a ScheduleDayDetailTitle WordWrap">Meal</div>
+                    <div class="ui-block-b ScheduleDayDetailTime">07:00 PM - 08:00 PM</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+            </tbody></table>
+</div></div>
+<div data-role="collapsible" style="background-color: White" class="SingleShift ui-collapsible ui-collapsible-collapsed"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-up-a ui-btn-icon-right" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-r" data-iconpos="right" data-theme="a"><span class="ui-btn-inner"><span class="ui-btn-text">
+        <div class="CollapsedScheduleDay">
+            <div class="ScheduleDayName">
+                Tue</div>
+            <div class="ScheduleDayDate">
+                08/21</div>
+                      
+        </div>
+       
+        <span class="ScheduleDayHeaderText" style="display:inline-block;">
+         
+                <span style="vertical-align: top;display:inline-block;">05:00 PM - 12:00 AM
+                                <div style="margin-left: 115px;"></div>
+               </span>
+          
+                    </span>
+ 
+    <span class="ui-collapsible-heading-status"> click to expand contents</span></span><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></span></a></h3><div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">
+    
+    <table cellpadding="0" cellspacing="0">
+    <tbody><tr>
+        <td class="ScheduleDayPadding">
+             
+        </td>
+        <td style="padding: 0px 10px 0px 10px !important; width: 100%">
+            <div class="ScheduleDayDetail">
+                    <div class="ScheduleDayDetailStoreNumber">
+                        Store #0371
+                    </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a ScheduleDayDetailTitle WordWrap">Grocery Clerk</div>
+                    <div class="ui-block-b ScheduleDayDetailTime">05:00 PM - 12:00 AM</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="ScheduleDayPadding">
+             
+        </td>
+        <td style="padding: 0px 10px 0px 10px !important; width: 100%">
+            <div class="ScheduleDayDetail">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a ScheduleDayDetailTitle WordWrap">Meal</div>
+                    <div class="ui-block-b ScheduleDayDetailTime">07:00 PM - 08:00 PM</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+            </tbody></table>
+</div></div>
+<div data-role="collapsible" style="background-color: White" class="NotScheduled ui-collapsible ui-collapsible-collapsed"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-up-a ui-btn-icon-right" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-r" data-iconpos="right" data-theme="a"><span class="ui-btn-inner"><span class="ui-btn-text">
+        <div class="CollapsedScheduleDay">
+            <div class="ScheduleDayName">
+                Wed</div>
+            <div class="ScheduleDayDate">
+                08/22</div>
+                      
+        </div>
+       
+        <span class="ScheduleDayHeaderText" style="display:inline-block;">
+         
+                          <span style="vertical-align: top;margin-right:60px;">Not Scheduled</span>
+          
+                    </span>
+ 
+    <span class="ui-collapsible-heading-status"> click to expand contents</span></span><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></span></a></h3><div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">
+    
+    <table cellpadding="0" cellspacing="0">
+            </table>
+</div></div>
+<div data-role="collapsible" style="background-color: White" class="SingleShift ui-collapsible ui-collapsible-collapsed"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-up-a ui-btn-icon-right" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-r" data-iconpos="right" data-theme="a"><span class="ui-btn-inner"><span class="ui-btn-text">
+        <div class="CollapsedScheduleDay">
+            <div class="ScheduleDayName">
+                Thu</div>
+            <div class="ScheduleDayDate">
+                08/23</div>
+                      
+        </div>
+       
+        <span class="ScheduleDayHeaderText" style="display:inline-block;">
+         
+                <span style="vertical-align: top;display:inline-block;">05:00 PM - 12:00 AM
+                                <div style="margin-left: 115px;"></div>
+               </span>
+          
+                    </span>
+ 
+    <span class="ui-collapsible-heading-status"> click to expand contents</span></span><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></span></a></h3><div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">
+    
+    <table cellpadding="0" cellspacing="0">
+    <tbody><tr>
+        <td class="ScheduleDayPadding">
+             
+        </td>
+        <td style="padding: 0px 10px 0px 10px !important; width: 100%">
+            <div class="ScheduleDayDetail">
+                    <div class="ScheduleDayDetailStoreNumber">
+                        Store #0371
+                    </div>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a ScheduleDayDetailTitle WordWrap">Grocery Clerk</div>
+                    <div class="ui-block-b ScheduleDayDetailTime">05:00 PM - 12:00 AM</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td class="ScheduleDayPadding">
+             
+        </td>
+        <td style="padding: 0px 10px 0px 10px !important; width: 100%">
+            <div class="ScheduleDayDetail">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a ScheduleDayDetailTitle WordWrap">Meal</div>
+                    <div class="ui-block-b ScheduleDayDetailTime">07:00 PM - 08:00 PM</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+            </tbody></table>
+</div></div>
+<div data-role="collapsible" style="background-color: White" class="NotScheduled ui-collapsible ui-collapsible-collapsed ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-up-a ui-btn-icon-right" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-r" data-iconpos="right" data-theme="a"><span class="ui-btn-inner"><span class="ui-btn-text">
+        <div class="CollapsedScheduleDay">
+            <div class="ScheduleDayName">
+                Fri</div>
+            <div class="ScheduleDayDate">
+                08/24</div>
+                      
+        </div>
+       
+        <span class="ScheduleDayHeaderText" style="display:inline-block;">
+         
+                          <span style="vertical-align: top;margin-right:60px;">Not Scheduled</span>
+          
+                    </span>
+ 
+    <span class="ui-collapsible-heading-status"> click to expand contents</span></span><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"> </span></span></a></h3><div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">
+    
+    <table cellpadding="0" cellspacing="0">
+            </table>
+</div></div>
+        </div>
+    </div>
+</form>
+        </div>
+<div data-role="footer" data-position="fixed" class="footer ui-footer ui-bar-a ui-footer-fixed slideup" role="contentinfo">
+    <div data-inset="true" class="ui-hide-label footerSection" data-theme="b" style="text-align: center;&#10;        font-family: Verdana; font-size: 11px;">
+        <div class="header">
+            
+            © <span>2018</span> Publix Asset Management Company.
+            All rights reserved.
+        </div>
+    </div>
+</div>
+    </div>
+    
+    
+
+
+<div class="ui-loader ui-corner-all ui-body-a ui-loader-default"><span class="ui-icon ui-icon-loading"></span><h1>loading</h1></div></body></html>
